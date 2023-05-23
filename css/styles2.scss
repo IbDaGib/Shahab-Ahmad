@@ -1,0 +1,65 @@
+// BASIC
+
+.image-gallery-unordered-list  {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  padding-top: 7rem;
+}
+
+.image-gallery-unordered-list li {
+  height: 40vh;
+  flex-grow: 1;
+  margin: 1%;
+  padding-right: 1%;
+}
+
+.image-gallery-unordered-list li:last-child {
+  // There's no science in using "10" here. In all my testing, this delivered the best results.
+  flex-grow: 10;
+}
+
+.image-gallery-unordered-list img {
+  max-height: 100%;
+  min-width: 100%;
+  object-fit: cover;
+  vertical-align: bottom;
+}
+
+// ADVANCED
+
+// Portrait
+
+@media (max-aspect-ratio: 1/1) {
+  .image-gallery-unordered-list li {
+    height: 30vh;
+  }
+}
+
+// Short screens
+
+@media (max-height: 480px) {
+  .image-gallery-unordered-list li {
+    height: 80vh;
+  }
+}
+
+// Smaller screens in portrait
+
+@media (max-aspect-ratio: 1/1) and (max-width: 480px) {
+  .image-gallery-unordered-list {
+    flex-direction: row;
+  }
+
+  .image-gallery-unordered-list li {
+    height: auto;
+    width: 100%;
+    padding: auto;
+  }
+  .image-gallery-unordered-list img {
+    width: 100%;
+    max-height: 75vh;
+    min-width: 0;
+  }
+}
