@@ -2,15 +2,10 @@
 <html>
     <script src="https://cdn.jsdelivr.net/npm/graphql-request@3.5.0/dist/index.min.js"></script>
 <script>
-  const client = new GraphQLClient('https://graphql.datocms.com', {
-    headers: {
-      Authorization: `c62a63fac00800726f215e2c7679b7`,
-      'X-Exclude-Invalid': 'true',
-    },
-  });
+const endpoint = 'https://graphql.datocms.com';
 
-  const query = `
-  infoPage {
+const query = `{
+    infoPage {
     subtitle {
       blocks
       links
@@ -24,19 +19,25 @@
       value
     }
   }
-  `;
+}`;
 
-  client.request(query)
-    .then(data => {
-      // Process the response
-      console.log(data);
-      // Update the HTML content with the retrieved data
-      document.getElementById('result').innerHTML = JSON.stringify(data);
-    })
-    .catch(error => {
-      // Handle errors
-      console.error(error);
-    });
+fetch(endpoint, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer 253721c7e7a812883479a842bc6594',
+  },
+  body: JSON.stringify({ query }),
+})
+  .then((response) => response.json())
+  .then((data) => {
+    // Handle the GraphQL response data here
+    console.log(data);
+  })
+  .catch((error) => {
+    // Handle any errors that occurred during the request
+    console.error(error);
+  });
 </script>
 <head>
   <title>My Webpage</title>
