@@ -1,5 +1,43 @@
 <!DOCTYPE html>
 <html>
+<script src="https://cdn.jsdelivr.net/npm/graphql-request@3.5.0/dist/index.min.js"></script>
+<script>
+  const client = new GraphQLClient('https://graphql.datocms.com', {
+    headers: {
+      Authorization: `Bearer YOUR_DATOCMS_API_TOKEN`,
+      'X-Exclude-Invalid': 'true',
+    },
+  });
+
+  const query = `
+  infoPage {
+    subtitle {
+      blocks
+      links
+      value
+    }
+    kicker
+    title
+    content {
+      blocks
+      links
+      value
+    }
+  }
+  `;
+
+  client.request(query)
+    .then(data => {
+      // Process the response
+      console.log(data);
+      // Update the HTML content with the retrieved data
+      document.getElementById('result').innerHTML = JSON.stringify(data);
+    })
+    .catch(error => {
+      // Handle errors
+      console.error(error);
+    });
+</script>
 <head>
   <title>My Webpage</title>
 </head>
