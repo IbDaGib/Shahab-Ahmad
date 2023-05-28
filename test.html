@@ -14,14 +14,18 @@
 
       const query = `{
         infoPage {
-          subtitle {
+            subtitle {
+            blocks
+            links
             value
-          }
-          kicker
-          title
-          content {
+            }
+            content {
+            blocks
+            links
             value
-          }
+            }
+            kicker
+            title
         }
       }`;
 
