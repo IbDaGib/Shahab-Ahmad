@@ -48,8 +48,8 @@
         .then((data) => {
           const infoPage = data.infoPage;
 
-          document.getElementById('title').textContent = infoPage.title;
-          document.getElementById('kicker').textContent = infoPage.kicker;
+          document.getElementById('title').textContent = infoPage.title.value;
+          document.getElementById('kicker').textContent = infoPage.kicker.value;
           document.getElementById('subtitle').textContent = infoPage.subtitle.value;
           document.getElementById('content').textContent = infoPage.content.value;
         })
