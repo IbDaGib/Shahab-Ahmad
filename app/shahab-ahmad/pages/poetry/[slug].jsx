@@ -1,22 +1,24 @@
+import { Image, StructuredText, useQuerySubscription } from "react-datocms";
 import Link from "next/link";
-import Image from "../../components/Image/Image";
-import { getAllSlugs, getPoemData } from "../../lib/Poems";
 import styles from '../../styles/PoetryPost.module.css';
+import { request } from "../../lib/datocms";
 
 export default function PoetryPage(props) {
     const { poemData } = props;
+    //const poemData = data.poem;
+
     return (
         <div className={styles.container}>
             <div style={{ maxWidth: "600px", marginTop: "20px" }}>
-                <Image src={poemData.coverImage} alt={poemData.title} layout="fill" />
+                <Image data={poemData.coverImage.responsiveImage} />
                 <h1>
                     {poemData.title}
                 </h1>
                 <p>
-                    {poemData.author} / {poemData.publishDate}
+                    {poemData.publishDate}
                 </p>
                 <p>
-                    {poemData.content}
+                    <StructuredText data={poemData.content.value} />
                 </p>
                 <div style={{ marginTop: "50px" }}>
                     <Link href="/">
@@ -28,19 +30,66 @@ export default function PoetryPage(props) {
     );
 }
 
-export const getStaticPaths = () => {
-    const paths = getAllSlugs();
+const PATHS_QUERY = `
+query MyQuery {
+    allPoems {
+      slug
+    }
+  }
+`;
+
+export const getStaticPaths = async () => {
+    const slugQuery = await request({
+        query: PATHS_QUERY,
+    });
+
+    let paths = [];
+    slugQuery.allPoems.map((p) => paths.push(`/poetry/${p.slug}`));
+
     return {
         paths,
-        fallback: false
+        fallback: false,
     };
 };
 
-export const getStaticProps = ({ params }) => {
-    const poemData = getPoemData(params.slug);
+const POEM_QUERY = `
+query MyQuery($slug: String) {
+    poem(filter: {slug: {eq: $slug}}) {
+      content {
+        value
+      }
+      coverImage {
+        responsiveImage {
+          alt
+          aspectRatio
+          base64
+          bgColor
+          height
+          sizes
+          src
+          srcSet
+          title
+          webpSrcSet
+          width
+        }
+      }
+      id
+      publishDate
+      slug
+      title
+    }
+}
+`;
+
+export const getStaticProps = async ({ params }) => {
+    const post = await request({
+        query: POEM_QUERY,
+        variables: { slug: params.slug },
+    });
+
     return {
         props: {
-            poemData,
+            poemData: post.poem,
         },
     };
 };

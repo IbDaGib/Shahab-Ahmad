@@ -3,7 +3,6 @@ const poems = [
       id: 1,
       title: "Poem 1",
       publishDate: "2021-09-05",
-      author: "Shahab Ahmad",
       coverImage: "/images/QWave Spotify Playlist.png",
       excerpt:
         "Today we will create smashed potatoes with some delicious meetballs",
@@ -15,7 +14,6 @@ const poems = [
       id: 2,
       title: "Poem 2",
       publishDate: "2021-08-25",
-      author: "Shahab Ahmad",
       coverImage: "/images/QWave Spotify Playlist.png",
       excerpt: "Tuna salad is easy and fast to make plus it is delicious.",
       content:
@@ -26,7 +24,6 @@ const poems = [
       id: 3,
       title: "Poem 3",
       publishDate: "2021-08-11",
-      author: "Shahab Ahmad",
       coverImage: "/images/QWave Spotify Playlist.png",
       excerpt:
         "Chicken soup is one of my favourite foods. It is easy and cheap to make.",
