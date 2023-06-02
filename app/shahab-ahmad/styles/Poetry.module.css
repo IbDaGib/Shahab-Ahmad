@@ -1,0 +1,23 @@
+.container {
+    min-height: 100vh;
+    margin-top: 70px;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: center;
+    height: 100vh;
+  }
+
+.body {
+    margin: 0;
+    padding: 0;
+    background: #115740;
+    font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #fafbff;
+    -webkit-font-smoothing: antialiased;
+    font-size: 16px;
+    line-height: 1.5;
+}

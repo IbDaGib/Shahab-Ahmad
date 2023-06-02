@@ -1,6 +1,6 @@
 import { Image, StructuredText, useQuerySubscription } from "react-datocms";
 import Link from "next/link";
-import styles from '../../styles/PoetryPost.module.css';
+import styles from '../../styles/Poetry.module.css';
 import { request } from "../../lib/datocms";
 
 export default function PoetryPage(props) {
